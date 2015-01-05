@@ -14,7 +14,7 @@ class GameWindow < Gosu::Window
     @average = 0
     @readings = []
     @averages = []
-    @file = open('readings.csv','w+')
+    @file = open("readings#{Time.now.to_i}.csv",'w+')
     Thread.new do
       loop do
         #puts "\nloopin"
@@ -46,6 +46,7 @@ class GameWindow < Gosu::Window
   def read_measures
     #puts "# reading measures"
     @line = read_line
+    puts @line
     line = @line.match(/^one reading:\t(?<reading>[0-9\.]+)\t\| average:\t(?<average>[0-9\.]+)/)
     return if line.nil?
     @reading = line['reading'].to_f
